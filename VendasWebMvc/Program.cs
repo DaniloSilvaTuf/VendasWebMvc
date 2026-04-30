@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 using VendasWebMvc.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<VendasWebMvcContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("VendasWebMvcContext") ?? throw new InvalidOperationException("Connection string 'VendasWebMvcContext' not found.")));
+    options.UseMySql(builder.Configuration.GetConnectionString("VendasWebMvcContext"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("VendasWebMvcContext")),
+        b => b.MigrationsAssembly("VendasWebMvc")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
