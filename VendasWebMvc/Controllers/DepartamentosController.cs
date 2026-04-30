@@ -10,16 +10,16 @@ using VendasWebMvc.Models;
 
 namespace VendasWebMvc.Controllers
 {
-    public class DepartamentoesController : Controller
+    public class DepartamentosController : Controller
     {
         private readonly VendasWebMvcContext _context;
 
-        public DepartamentoesController(VendasWebMvcContext context)
+        public DepartamentosController(VendasWebMvcContext context)
         {
             _context = context;
         }
 
-        // GET: Departamentoes
+        // GET: Departamentos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Departamento.ToListAsync());
@@ -43,13 +43,13 @@ namespace VendasWebMvc.Controllers
             return View(departamento);
         }
 
-        // GET: Departamentoes/Create
+        // GET: Departamentos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Departamentoes/Create
+        // POST: Departamentos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
