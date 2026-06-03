@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using VendasWebMvc.Data;
+using VendasWebMvc.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<VendasWebMvcContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("VendasWebMvcContext"),
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<VendasWebMvcContext>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<VendedorService>();
 
 var app = builder.Build();
 
