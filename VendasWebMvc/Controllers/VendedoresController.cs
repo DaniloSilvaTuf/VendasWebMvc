@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VendasWebMvc.Models;
+using VendasWebMvc.Models.ViewModels;
 using VendasWebMvc.Services;
 
 namespace VendasWebMvc.Controllers
@@ -8,10 +9,12 @@ namespace VendasWebMvc.Controllers
     {
 
         private readonly VendedorService _vendedorService;
+        private readonly DepartamentoService _departamentoService;
 
-        public VendedoresController(VendedorService vendedorService)
+        public VendedoresController(VendedorService vendedorService, DepartamentoService departamentoService)
         {
             _vendedorService = vendedorService;
+            _departamentoService = departamentoService;
         }
 
         public IActionResult Index()
@@ -22,7 +25,9 @@ namespace VendasWebMvc.Controllers
 
         public IActionResult Cadastrar()
         {
-            return View();
+            var departamentos = _departamentoService.FindAll();
+            var viewModel = new VendedorFormViewModel { Departamentos = departamentos };
+            return View(viewModel);
         }
 
         [HttpPost]
