@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Localization;
 using System.Configuration;
+using System.Globalization;
 using VendasWebMvc.Data;
 using VendasWebMvc.Services;
 
@@ -18,6 +20,16 @@ builder.Services.AddScoped<VendedorService>();
 builder.Services.AddScoped<DepartamentoService>();
 
 var app = builder.Build();
+
+var ptBR = new CultureInfo("pt-BR");
+var opcoesLocalizacao = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(ptBR),
+    SupportedCultures = new List<CultureInfo> { ptBR },
+    SupportedUICultures = new List<CultureInfo> { ptBR }
+};
+
+app.UseRequestLocalization(opcoesLocalizacao);
 
 using (var scope = app.Services.CreateScope())
 {
