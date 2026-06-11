@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 namespace VendasWebMvc.Models
 {
@@ -25,6 +26,7 @@ namespace VendasWebMvc.Models
         [Required(ErrorMessage = " Obrigatório")]
         [Range(100.0, 100000.0, ErrorMessage = " O {0} deve ser entre R$ {1} e R$ {2}.")]
         public double SalarioBase { get; set; }
+        [ValidateNever]
         public Departamento Departamento { get; set; }
         public int DepartamentoId { get; set; }
         public ICollection<HistoricoVendas> Vendas { get; set; } = new List<HistoricoVendas>();

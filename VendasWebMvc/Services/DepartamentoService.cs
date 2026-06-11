@@ -1,5 +1,6 @@
 ﻿using VendasWebMvc.Data;
 using VendasWebMvc.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace VendasWebMvc.Services
 {
@@ -11,10 +12,10 @@ namespace VendasWebMvc.Services
         {
             _context = context;
         }
-
-        public List<Departamento> FindAll()
+        // Operação Assíncrona 
+        public async Task<List<Departamento>> FindAllAsync()
         {
-            return _context.Departamento.OrderBy(x => x.Nome).ToList();
+            return await _context.Departamento.OrderBy(x => x.Nome).ToListAsync();
         }
     }
 }
